@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <% include ../partials/head %>
+  <script>
+  // 대출금액 셋팅
+  function fnc_money(loan_money){
+    $("#loan_money").val(comma(loan_money));
+    $("#show_money").text(comma(loan_money) + "원");
+  }
+
+  // 대출금리 셋팅
+  function fnc_loan_rate(loan_rate){
+    $("#loan_rate").val(loan_rate);
+  }
+
+  // 대출기간 셋팅
+  function fnc_loan_period(loan_period){
+    loan_month_period = loan_period * 12;
+
+    $("#loan_period").val(loan_month_period);
+  }
+
+  // 거치기간 셋팅
+  function fnc_leaving_period(leaving_period){
+    leaving_month_period = leaving_period * 12;
+
+    $("#leaving_period").val(leaving_month_period);
+  }
+
+  $(document).ready(function(){
+    $("#btn_loan_calc").click(function(){
+      // 대출금액
+      var loan_money = $("#loan_money").val();
+      // 대출금리
+      var loan_rate  = $("#loan_rate").val();
+      // 대출기간
+      var loan_period = $("#loan_period").val();
+      // 거치기간
+      var leaving_period = $("#leaving_period").val();
+
+      if(loan_money == ""){
+        alert("대출금액을 입력해주세요.");
+        $("#loan_money").focus();
+        return ;
+      }
+
+      if(loan_rate == ""){
+        alert("대출금리 입력해주세요.");
+        $("#loan_rate").focus();
+        return ;
+      }
+
+      if(loan_period == ""){
+        alert("대출기간을 입력해주세요.");
+        $("#loan_period").focus();
+        return ;
+      }
+
+      if(leaving_period == ""){
+        alert("거치기간을 입력해주세요.");
+        $("#leaving_period").focus();
+        return ;
+      }
+
+      // 콤마 풀기
+      var loan_money = uncomma(loan_money);
+      $("#loan_money").val(loan_money);
+
+      var frm = $("#frm");
+      frm.submit();
+
+    });
+  });
+  </script>
+ </head>
+ <body>
+  <% include ../partials/nav %>
+  <div class="container post">
+    <form id = "frm" method="POST" action="loan/calc">
+      <div class="form-group">
+        <label>대출금</label>
+        <div class="input-group">
+          <input type="text" class="form-control loan_input" id = "loan_money" name = "loan_money" onkeyup="inputNumberFormat(this)" numberOnly>
+          <span class="input-group-addon" id="basic-addon1">원</span>
+        </div>
+        <small class="form-text text-muted" id = "show_money" style = "color:blue"></small>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="fnc_money(1000000)">백만원</button>
+      <button type="button" class="btn btn-success" onclick="fnc_money(10000000)">천만원</button>
+      <button type="button" class="btn btn-warning" onclick="fnc_money(100000000)">일억원</button>
+      <div class="form-group">
+        <label>대출금리</label>
+        <div class="input-group">
+          <span class="input-group-addon">연</span>
+          <input type="text" class="form-control loan_input" id = "loan_rate" name = "loan_rate" numberOnly>
+          <span class="input-group-addon" id="basic-addon1">%</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="fnc_loan_rate(3)">3%</button>
+      <button type="button" class="btn btn-success" onclick="fnc_loan_rate(4)">4%</button>
+      <button type="button" class="btn btn-warning" onclick="fnc_loan_rate(5)">5%</button>
+      <div class="form-group">
+        <label>대출기간</label>
+        <div class="input-group">
+          <input type="text" class="form-control loan_input" id = "loan_period" name = "loan_period" numberOnly>
+          <span class="input-group-addon" id="basic-addon1">개월</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="fnc_loan_period(1)">1년</button>
+      <button type="button" class="btn btn-success" onclick="fnc_loan_period(2)">2년</button>
+      <button type="button" class="btn btn-warning" onclick="fnc_loan_period(3)">3년</button>
+      <div class="form-group">
+        <label>거치기간</label>
+        <div class="input-group">
+          <input type="text" class="form-control loan_input" id = "leaving_period" name = "leaving_period" value = "0" numberOnly>
+          <span class="input-group-addon" id="basic-addon1">개월</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary" onclick="fnc_leaving_period(0)">0년</button>
+      <button type="button" class="btn btn-success" onclick="fnc_leaving_period(1)">1년</button>
+      <button type="button" class="btn btn-warning" onclick="fnc_leaving_period(2)">2년</button>
+      <div class="form-group">
+        <label>상환방법</label>
+        <select class="form-control" id = "repay_way" name = "repay_way">
+          <option value = "1">원리금 균등 상환</option>
+          <option value = "2">원금 균등 상환</option>
+          <option value = "3">원금 만기 일시 상환</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary" id = "btn_loan_calc">계산하기</button>
+      </div>
+    </form>
+  </div>
+ </body>
+</html>

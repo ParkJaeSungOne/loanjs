@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <% include ../partials/head %>
+  </head>
+  <body>
+    <% include ../partials/nav %>
+    <div class="container post">
+      <table class="table table-bordered">
+        <tr>
+          <td>대출금</td>
+          <td align = "right"><%=loan_money%>원</td>
+        </tr>
+        <tr>
+          <td>대출금리</td>
+          <td align = "right"><%=loan_rate%>%</td>
+        </tr>
+        <tr>
+          <td>대출기간</td>
+          <td align = "right"><%=loan_period%>개월</td>
+        </tr>
+        <tr>
+          <td>거치기간</td>
+          <td align = "right"><%=leaving_period%>개월</td>
+        </tr>
+        <tr>
+          <td>상환방법</td>
+          <td align = "right"><%=repay_way_name%></td>
+        </tr>
+        <tr>
+          <td>총 이자</td>
+          <td align = "right"><%=JSON.parse(jsonDatas)[loan_period].sum_interest_money%>원</td>
+        </tr>
+      </table>
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" align = "center">#</th>
+            <th scope="col" align = "center">상환금</th>
+            <th scope="col" align = "center">납입원금</th>
+            <th scope="col" align = "center">이자</th>
+            <th scope="col" align = "center">납입원금 합계</th>
+            <th scope="col" align = "center">대출잔여금</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% JSON.parse(jsonDatas).forEach(function(jsonDatas){ %>
+            <tr>
+              <th align = "center"><%=jsonDatas.num%></th>
+              <td align = "right"><%=jsonDatas.calc%></td>
+              <td align = "right"><%=jsonDatas.origin_money%></td>
+              <td align = "right"><%=jsonDatas.interest_money%></td>
+              <td align = "right"><%=jsonDatas.sum_origin_money%></td>
+              <td align = "right"><%=jsonDatas.loan_remaining_money;%></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

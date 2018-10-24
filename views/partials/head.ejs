@@ -1,0 +1,34 @@
+<meta http-equiv="X-UA-Compatible" content="IE=IE9" />
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="Keywords" content="대출계산기, 대출이자계산기, 원리금상환계산기, 원리금균등상환 계산기, 원금균등상환 계산기, 원금만기일시상환 계산기, 대출이자계산기 xls, 대출 이자 계산 엑셀, 대출 이자, 이자 계산기, 대출 금리, 원리금균등상환, 원금균등상환, 원금만기일시상환,   담보대출, 대출금리, 대출이자, 신용대출, 은행대출, 전세대출, 전세자금대출, 주택담보대출, 주택대출, 학자금대출,  대출계산기, 대출이자계산기, 이자계산기, 대출금리계산기, 다음 금융계산기, 적금계산기, 예금계산기, 대출이자 계산기, 적금금리계산기, 이자계산, 대출이자계산법, 이자계산법, 디딤돌 대출">
+	<meta name="Description" content="대출 이자 계산기는 엑셀(xls)보다 편리하게 바로 계산해볼 수 있습니다. 원리금균등상환/원금균등상환/원금만기일시상환 방법을 지원합니다. (모바일 지원 금융계산기, 대출계산기, 대출상환계산기, 대출 이자 비교)">
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,600" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/css/master.css">
+
+<title>금융관련 계산기</title>
+
+<script>
+  // 콤마찍기
+  function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+  }
+
+  //콤마풀기
+  function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+  }
+
+  //값 입력시 콤마찍기
+  function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+  }
+</script>
