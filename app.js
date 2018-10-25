@@ -8,7 +8,7 @@ var passport = require("./config/passport");
 
 var app = express();
 
-mongoose.connect(process.env.MONGO_DB, {useNewUrlParser:true});
+mongoose.connect('mongodb://dbuser:wotjd11442@ds243049.mlab.com:43049/mdb');
 
 var db = mongoose.connection;
 db.once("open", function(){
