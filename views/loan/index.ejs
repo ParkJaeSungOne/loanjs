@@ -3,10 +3,9 @@
  <head>
   <% include ../partials/head %>
   <script>
-  // 대출금액 셋팅
+  // 대출금 셋팅
   function fnc_money(loan_money){
     $("#loan_money").val(comma(loan_money));
-    $("#show_money").text(comma(loan_money) + "원");
   }
 
   // 대출금리 셋팅
@@ -75,63 +74,130 @@
   </script>
  </head>
  <body>
-  <% include ../partials/nav %>
-  <div class="container post">
-    <form id = "frm" method="POST" action="loan/calc">
-      <div class="form-group">
-        <label>대출금</label>
+  <% include ../partials/header %>
+  <form id = "frm" method="POST" action="loan/calc">
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">대출금
+        </h3>
+      </div>
+      <div class="panel-body">
         <div class="input-group">
-          <input type="text" class="form-control loan_input" id = "loan_money" name = "loan_money" onkeyup="inputNumberFormat(this)" numberOnly>
+          <input type="text" class="form-control" id = "loan_money" name = "loan_money" onkeyup="inputNumberFormat(this)" numberOnly>
           <span class="input-group-addon" id="basic-addon1">원</span>
         </div>
-        <small class="form-text text-muted" id = "show_money" style = "color:blue"></small>
+        <div style = "margin-top:10px">
+          <button type="button" class="btn btn-danger" onclick="fnc_money(1000000)">백만원</button>
+          <button type="button" class="btn btn-success" onclick="fnc_money(10000000)">천만원</button>
+          <button type="button" class="btn btn-warning" onclick="fnc_money(100000000)">일억원</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" onclick="fnc_money(1000000)">백만원</button>
-      <button type="button" class="btn btn-success" onclick="fnc_money(10000000)">천만원</button>
-      <button type="button" class="btn btn-warning" onclick="fnc_money(100000000)">일억원</button>
-      <div class="form-group">
-        <label>대출금리</label>
+    </div>
+
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">대출금리
+        </h3>
+      </div>
+      <div class="panel-body">
         <div class="input-group">
           <span class="input-group-addon">연</span>
           <input type="text" class="form-control loan_input" id = "loan_rate" name = "loan_rate" numberOnly>
           <span class="input-group-addon" id="basic-addon1">%</span>
         </div>
+        <div style = "margin-top:10px">
+          <button type="button" class="btn btn-danger" onclick="fnc_loan_rate(3)">3%</button>
+          <button type="button" class="btn btn-success" onclick="fnc_loan_rate(4)">4%</button>
+          <button type="button" class="btn btn-warning" onclick="fnc_loan_rate(5)">5%</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" onclick="fnc_loan_rate(3)">3%</button>
-      <button type="button" class="btn btn-success" onclick="fnc_loan_rate(4)">4%</button>
-      <button type="button" class="btn btn-warning" onclick="fnc_loan_rate(5)">5%</button>
-      <div class="form-group">
-        <label>대출기간</label>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">대출기간
+        </h3>
+      </div>
+      <div class="panel-body">
         <div class="input-group">
           <input type="text" class="form-control loan_input" id = "loan_period" name = "loan_period" numberOnly>
           <span class="input-group-addon" id="basic-addon1">개월</span>
         </div>
+        <div style = "margin-top:10px">
+          <button type="button" class="btn btn-danger" onclick="fnc_loan_period(1)">1년</button>
+          <button type="button" class="btn btn-success" onclick="fnc_loan_period(2)">2년</button>
+          <button type="button" class="btn btn-warning" onclick="fnc_loan_period(3)">3년</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" onclick="fnc_loan_period(1)">1년</button>
-      <button type="button" class="btn btn-success" onclick="fnc_loan_period(2)">2년</button>
-      <button type="button" class="btn btn-warning" onclick="fnc_loan_period(3)">3년</button>
-      <div class="form-group">
-        <label>거치기간</label>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">거치기간
+        </h3>
+      </div>
+      <div class="panel-body">
         <div class="input-group">
           <input type="text" class="form-control loan_input" id = "leaving_period" name = "leaving_period" value = "0" numberOnly>
           <span class="input-group-addon" id="basic-addon1">개월</span>
         </div>
+        <div style = "margin-top:10px">
+          <button type="button" class="btn btn-danger" onclick="fnc_leaving_period(0)">0년</button>
+          <button type="button" class="btn btn-success" onclick="fnc_leaving_period(1)">1년</button>
+          <button type="button" class="btn btn-warning" onclick="fnc_leaving_period(2)">2년</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-primary" onclick="fnc_leaving_period(0)">0년</button>
-      <button type="button" class="btn btn-success" onclick="fnc_leaving_period(1)">1년</button>
-      <button type="button" class="btn btn-warning" onclick="fnc_leaving_period(2)">2년</button>
-      <div class="form-group">
-        <label>상환방법</label>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">상환방법
+        </h3>
+      </div>
+      <div class="panel-body">
         <select class="form-control" id = "repay_way" name = "repay_way">
           <option value = "1">원리금 균등 상환</option>
           <option value = "2">원금 균등 상환</option>
           <option value = "3">원금 만기 일시 상환</option>
         </select>
       </div>
-      <div class="form-group">
-        <button type="button" class="btn btn-primary" id = "btn_loan_calc">계산하기</button>
-      </div>
-    </form>
+    </div>
   </div>
- </body>
-</html>
+  <div class="col-sm-6">
+    <input type = "button" class = "btn btn-primary" value = "계산하기" id = "btn_loan_calc">
+  </div>
+  <div class="col-sm-12">
+    <div class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title">상환방법 안내
+        </h3>
+      </div>
+      <div class="panel-body">
+        <table class = "table table-bordered">
+          <tbody>
+            <tr align="">
+              <td >원리금 균등상환</td>
+              <td >가장 일반적인 방법으로, 원금과 이자를 합한 상환금액이 매달 동일.</td>
+            </tr>
+            <tr align="">
+            <td >원금균등 상환</td>
+              <td >매달 원금을 동일하게 상환하므로, 이자는 매달 줄어들게 됩니다. 단, 매달 이자가 다르므로 원금과 이자를 합한 상환금액도 매달 달라집니다.</td>
+            </tr>
+            <tr align="">
+            <td >원금만기 일시상환</td>
+              <td >대출기간동안 매달 이자만 상환하하고, 대출 만기일에 원금을 일시상환 합니다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+<% include ../partials/footer %>

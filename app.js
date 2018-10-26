@@ -42,6 +42,7 @@ app.use("/", require("./routes/index"));
 app.use("/posts", require("./routes/posts"));
 app.use("/users", require("./routes/users"));
 app.use("/loan", require("./routes/loan"));
+app.use("/size", require("./routes/size"));
 
 var port = process.env.PORT || 3000;
 app.listen(port, function(){

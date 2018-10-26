@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <% include ../partials/head %>
+  <script>
+  $(document).ready(function(){
+    $("#calc1_m").keyup(function(){
+      $.ajax({
+        type : "POST",
+        url : "/size/calc",
+        data : {"obj1" : this.value,
+                "t_type"  : "1" },
+        dataType : "json",
+        success : function(data){
+            $("#calc1_p").val(data.obj1 + "평");
+        },
+        error:function(xhr,status,error){ //ajax 오류인경우
+                alert("error\nxhr : " + xhr + ", status : " + status + ", error : " + error);
+        }
+      });
+    });
+
+    $("#calc2_p").keyup(function(){
+      $.ajax({
+        type : "POST",
+        url : "/size/calc",
+        data : {"obj1" : this.value,
+                "t_type"  : "2" },
+        dataType : "json",
+        success : function(data){
+            $("#calc2_m").val(data.obj1 + "㎡(제곱미터)");
+        },
+        error:function(xhr,status,error){ //ajax 오류인경우
+                alert("error\nxhr : " + xhr + ", status : " + status + ", error : " + error);
+        }
+      });
+    });
+  });
+  </script>
+ </head>
+ <body>
+  <% include ../partials/header %>
+      <div class="col-sm-6">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">㎡(제곱미터) → 평</h3>
+          </div>
+          <div class="panel-body">
+            <div class = "row">
+              <div class ="col-sm-5"><input type="text" class="form-control" placeholder="㎡(제곱미터)" id = "calc1_m" numberOnly></div>
+              <div class ="col-sm-2">→</div>
+              <div class ="col-sm-5"><input type="text" class="form-control" placeholder="평" readonly id = "calc1_p"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <h3 class="panel-title">평 → ㎡(제곱미터)</h3>
+          </div>
+          <div class="panel-body">
+            <div class = "row">
+              <div class ="col-sm-5"><input type="text" class="form-control" placeholder="평" id = "calc2_p" numberOnly></div>
+              <div class ="col-sm-2">→</div>
+              <div class ="col-sm-5"><input type="text" class="form-control" placeholder="㎡(제곱미터)" readonly id = "calc2_m"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class = "row">
+      <div class="col-sm-6">
+        <div class="panel panel-success">
+          <div class="panel-heading">
+            <h3 class="panel-title">제곱미터(㎡) &#8211; 평 변환표 / 1㎡ = 0.3025평</h3>
+          </div>
+          <div class="panel-body">
+            <form class="form-inline" role="form">
+              <table border="0" summary="제곱미터-평" cellspacing="1" cellpadding="3" class = "table">
+              <tbody>
+              <tr align="center">
+              <td nowrap="nowrap">제곱미터(㎡)</td>
+              <td>평</td>
+              <td nowrap="nowrap">제곱미터(㎡)</td>
+              <td>평</td>
+              </tr>
+              <tr align="right">
+              <td >1 &#8211; 10㎡</td>
+              <td align="center" >0.3 &#8211; 3.02평</td>
+              <td >71 &#8211; 80㎡</td>
+              <td align="center" >21.47 &#8211; 24.2평</td>
+              </tr>
+              <tr align="right">
+              <td >11 &#8211; 20㎡</td>
+              <td align="center" >3.32 &#8211; 6.05평</td>
+              <td >81 &#8211; 90㎡</td>
+              <td align="center" >24.5 &#8211; 27.22평</td>
+              </tr>
+              <tr align="right">
+              <td >21 &#8211; 30㎡</td>
+              <td align="center" >6.35 &#8211; 9.07평</td>
+              <td >91 &#8211; 100㎡</td>
+              <td align="center" >27.52 &#8211; 30.25평</td>
+              </tr>
+              <tr align="right">
+              <td >31 &#8211; 40㎡</td>
+              <td align="center" >9.37 &#8211; 12.1평</td>
+              <td >101 &#8211; 110㎡</td>
+              <td align="center" >30.55 &#8211; 33.27평</td>
+              </tr>
+              <tr align="right">
+              <td >41 &#8211; 50㎡</td>
+              <td align="center" >12.40 &#8211; 15.12평</td>
+              <td >111 &#8211; 120㎡</td>
+              <td align="center" >33.52 &#8211; 36.3평</td>
+              </tr>
+              <tr align="right">
+              <td >51 &#8211; 60㎡</td>
+              <td align="center" >15.42 &#8211; 18.15평</td>
+              <td >121 &#8211; 130㎡</td>
+              <td align="center" >36.60 &#8211; 39.32평</td>
+              </tr>
+              <tr align="right">
+              <td >61 &#8211; 70㎡</td>
+              <td align="center" >18.45 &#8211; 21.17평</td>
+              <td >131 &#8211; 140㎡</td>
+              <td align="center" >39.62 &#8211; 42.35평</td>
+              </tr>
+              </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="panel panel-warning">
+          <div class="panel-heading">
+            <h3 class="panel-title">평 &#8211; 제곱미터(㎡) 변환표 / 1평 = 3.31㎡</h3>
+          </div>
+          <div class="panel-body">
+            <form class="form-inline" role="form">
+              <table border="0" summary="평-제곱미터" cellspacing="1" cellpadding="3" class = "table">
+              <tbody>
+              <tr align="center">
+              <td nowrap="nowrap">평</td>
+              <td nowrap="nowrap">제곱미터(㎡)</td>
+              <td nowrap="nowrap">평</td>
+              <td nowrap="nowrap">제곱미터(㎡)</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >1 &#8211; 5평</td>
+              <td >3.31 &#8211; 16.53㎡</td>
+              <td align="center" >51 &#8211; 55평</td>
+              <td >168.60 &#8211; 181.82㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >6 &#8211; 10평</td>
+              <td >6.61 &#8211; 33.06㎡</td>
+              <td align="center" >56 &#8211; 60평</td>
+              <td >185.12 &#8211; 198.35㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >11 &#8211; 15평</td>
+              <td >36.36 &#8211; 49.59㎡</td>
+              <td align="center" >61 &#8211; 65평</td>
+              <td >201.65 &#8211; 214.88㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >16 &#8211; 20평</td>
+              <td >52.89 &#8211; 66.12㎡</td>
+              <td align="center" >66 &#8211; 70평</td>
+              <td >218.18 &#8211; 231.40㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >21 &#8211; 25평</td>
+              <td >69.42 &#8211; 82.64㎡</td>
+              <td align="center" >71 &#8211; 75평</td>
+              <td >234.71 &#8211; 247.93㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >26 &#8211; 30평</td>
+              <td >85.95 &#8211; 99.17㎡</td>
+              <td align="center" >76 &#8211; 80평</td>
+              <td >251.24 &#8211; 264.46㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >31 &#8211; 35평</td>
+              <td >102.47 &#8211; 115.70㎡</td>
+              <td align="center" >81 &#8211; 85평</td>
+              <td >267.77 &#8211; 280.99㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >36 &#8211; 40평</td>
+              <td >119.01 &#8211; 132.23㎡</td>
+              <td align="center" >86 &#8211; 90평</td>
+              <td >284.30 &#8211; 297.52㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >41 &#8211; 45평</td>
+              <td >135.54 &#8211; 148.76㎡</td>
+              <td align="center" >91 &#8211; 95평</td>
+              <td >300.83 &#8211; 314.05㎡</td>
+              </tr>
+              <tr align="right">
+              <td align="center" >46 &#8211; 50평</td>
+              <td >152.07㎡ &#8211; 165.29㎡</td>
+              <td align="center" >96 &#8211; 100평</td>
+              <td >317.36 &#8211; 330.58㎡</td>
+              </tr>
+              </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+<% include ../partials/footer %>
