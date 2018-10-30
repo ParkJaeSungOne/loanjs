@@ -4,12 +4,17 @@
   <% include partials/head %>
  </head>
  <body>
-  <% include partials/nav %>
-  <div class="container home home-welcome">
+  <% include partials/header %>
    <div class="jumbotron">
-    <h1>Node JS - 게시판</h1>
-    <P>박재성</p>
+    <div class="container">
+     <h1>Node JS - 게시판</h1>
+    </div>
+   </div>
+   <div class = "col-md-6">
+    왼쪽판넬
+   </div>
+   <div class = "col-md-6">
+    오른쪽판넬
    </div>
   </div>
- </body>
-</html>
+ <% include partials/footer %>
